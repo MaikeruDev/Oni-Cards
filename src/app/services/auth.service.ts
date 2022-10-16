@@ -13,7 +13,7 @@ export class AuthService {
   constructor(private afAuth: AngularFireAuth, private db: AngularFirestore, private alertController: AlertController) {
   }
 
-  async createUserWithEmailAndPassword(email, password, username){
+  async createUserWithEmailAndPassword(email, password, username, d_id){
     return new Promise<any>((resolve, reject) => {
       this.afAuth.createUserWithEmailAndPassword(email, password).then(credential => {
         credential.user.updateProfile({
@@ -27,9 +27,10 @@ export class AuthService {
 
             this.db.collection("users/").doc(this.uid).set({
               username: username,
-              pfp: "https://avatars.dicebear.com/api/miniavs/" + this.uid + ".svg",
+              pfp: "https://avatars.dicebear.com/api/micah/" + this.uid + ".svg",
               email: email.toLowerCase(),
-              uid: this.uid
+              uid: this.uid,
+              d_id: d_id
             }).then(res => {
               location.reload();
             })
@@ -102,8 +103,8 @@ export class AuthService {
     .then(async (res: any) =>{
       const alert = await this.alertController.create({
         cssClass: 'my-custom-class',
-        header: 'Geschafft!',
-        message: "Eine E-Mail zum Zurücksetzen Ihres Passworts wurde gesendet.",
+        header: 'Done!',
+        message: "An email to reset your password has been sent.",
         buttons: ['OK']
       });
   
@@ -124,7 +125,7 @@ export class AuthService {
       const alert = await this.alertController.create({
         cssClass: 'my-custom-class',
         header: 'Error',
-        message: 'Bitte geben Sie eine gültige E-Mail ein.',
+        message: 'Please enter a valid email.',
         buttons: ['OK']
       });
   
