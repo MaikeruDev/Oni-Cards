@@ -1,0 +1,7 @@
+{
+  "name": "oni-cards-online",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
