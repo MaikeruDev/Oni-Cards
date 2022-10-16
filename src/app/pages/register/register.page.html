@@ -1,0 +1,32 @@
+<ion-content>
+  <div class="bg-image"></div>
+  <div class="foreground">
+    <ion-card>
+      <ion-card-header>
+        <ion-card-title>Sign up</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        <ion-item lines="none" color="light">
+          <ion-icon slot="start" name="person"></ion-icon>
+          <ion-input type="text" placeholder="User Name"></ion-input>
+        </ion-item>
+        <ion-item lines="none" color="light">
+          <ion-icon slot="start" name="mail"></ion-icon>
+          <ion-input (keyup.enter)="signIn()" type="email" placeholder="E-Mail"></ion-input>
+        </ion-item>
+        <ion-item lines="none" color="light">
+          <ion-icon slot="start" name="lock-closed"></ion-icon>
+          <ion-input (keyup.enter)="signIn()" type="password" placeholder="Password"></ion-input>
+        </ion-item>
+        <ion-button (click)="signIn()" expand="block">
+          <ion-icon slot="end" name="arrow-forward-outline"></ion-icon>
+          Sign up
+        </ion-button>
+        <ion-text (click)="register()" color="dark">
+          <p>Already have an account?</p>
+        </ion-text>
+      </ion-card-content>
+    </ion-card>
+  </div>
+</ion-content>
+

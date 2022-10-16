@@ -1,0 +1,53 @@
+<ion-header class="ion-no-border" [translucent]="true">
+  <app-header page="drops"></app-header>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <div class="grid">
+    <div class="top"></div>
+    <div class="left">
+      <ion-list style="background-color: transparent !important;">
+      
+      </ion-list>
+    </div>
+    <div class="middle">
+      <swiper [effect]="'cards'" [grabCursor]="true" class="mySwiper" initialSlide="1" (slideChange)="onSlideChange()" #swiper *ngIf="activeDrop">
+        <ng-template swiperSlide>
+          <img [ngClass]="{card_active: btn1}" src="../../../assets/temp/card.png" alt="">
+          <ion-button (click)="grabCard()" expand="block" [fill]="btn1 ? 'solid' : 'outline'" [disabled]="!btn1">
+            Select Card
+          </ion-button>
+        </ng-template>
+        <ng-template swiperSlide>
+          <img [ngClass]="{card_active: btn2}" src="../../../assets/temp/card2.png" alt="">
+          <ion-button (click)="grabCard()" expand="block" [fill]="btn2 ? 'solid' : 'outline'" [disabled]="!btn2">
+            Select Card
+          </ion-button>
+        </ng-template>
+        <ng-template swiperSlide>
+          <img [ngClass]="{card_active: btn3}" src="../../../assets/temp/card3.png" alt="">
+          <ion-button (click)="grabCard()" expand="block" [fill]="btn3 ? 'solid' : 'outline'" [disabled]="!btn3">
+            Select Card
+          </ion-button>
+        </ng-template>
+      </swiper>
+
+      <div class="ring" *ngIf="activeDrop"></div>
+      
+      <div style="position:relative; top: 35%; transform:translateY(-80%)" *ngIf="!activeDrop">
+        <h1 class="ion-text-center" style="font-size: 2.5vh">Time until next drop:</h1>
+        <ion-title class="ion-text-center" style="font-size: 7vh" *ngIf="900000 >= this.now - this.lastDrop">{{ remaining }}</ion-title>
+        <ion-title class="ion-text-center" style="font-size: 7vh" *ngIf="this.now - this.lastDrop > 900000">Now</ion-title>
+      </div>
+
+      <div class="wrap" *ngIf="readyDrop && !activeDrop">
+        <button class="button" (click)="activateDrop()">Drop</button>
+      </div>
+
+    </div>
+    <div class="right"></div>
+    <div class="foot"></div>
+  </div>
+
+
+</ion-content>
