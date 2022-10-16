@@ -8,11 +8,11 @@
       <ion-card-content>
         <ion-item lines="none" color="light">
           <ion-icon slot="start" name="mail"></ion-icon>
-          <ion-input (keyup.enter)="signIn()" type="email" placeholder="E-Mail"></ion-input>
+          <ion-input [(ngModel)]="email" (keyup.enter)="signIn()" type="email" placeholder="E-Mail"></ion-input>
         </ion-item>
         <ion-item lines="none" color="light">
           <ion-icon slot="start" name="lock-closed"></ion-icon>
-          <ion-input (keyup.enter)="signIn()" type="password" placeholder="Password"></ion-input>
+          <ion-input [(ngModel)]="password" (keyup.enter)="signIn()" type="password" placeholder="Password"></ion-input>
         </ion-item>
         <ion-button (click)="signIn()" expand="block">
           <ion-icon slot="end" name="arrow-forward-outline"></ion-icon>
