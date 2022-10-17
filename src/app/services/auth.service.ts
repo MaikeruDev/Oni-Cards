@@ -1,7 +1,10 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
+import { AngularFireStorage } from '@angular/fire/compat/storage';
 import { AlertController } from '@ionic/angular';
+import { take, map, finalize } from 'rxjs/operators'
 
 @Injectable({
   providedIn: 'root'
@@ -9,46 +12,79 @@ import { AlertController } from '@ionic/angular';
 export class AuthService {
 
   uid: any;
+  imageUrl: any
 
-  constructor(private afAuth: AngularFireAuth, private db: AngularFirestore, private alertController: AlertController) {
+  constructor(private afAuth: AngularFireAuth, private db: AngularFirestore, private alertController: AlertController, public http: HttpClient, public storage: AngularFireStorage) {
   }
 
-  async createUserWithEmailAndPassword(email, password, username, d_id){
-    return new Promise<any>((resolve, reject) => {
-      this.afAuth.createUserWithEmailAndPassword(email, password).then(credential => {
-        credential.user.updateProfile({
-          displayName: username,
-        })
-      }).then(
-        async res => {
-          await this.afAuth.user.subscribe(user => {
-            
-            this.uid = user.uid
-
-            this.db.collection("users/").doc(this.uid).set({
-              username: username,
-              pfp: "https://avatars.dicebear.com/api/micah/" + this.uid + ".svg",
-              email: email.toLowerCase(),
-              uid: this.uid,
-              d_id: d_id
-            }).then(res => {
-              location.reload();
-            })
-          })
-        },
-        async err => {
-          this.convertMessage(err.code).then(async res => {
-            const alert = await this.alertController.create({
-              header: "Oopsie",
-              message: res,
-              buttons: ["RETRY"]
-            })
-  
-            await alert.present();
-          })
-        }
+  async imageUrlToBase64(urL: string) {
+    return this.http.get(urL, {
+        observe: 'body',
+        responseType: 'arraybuffer',
+      })
+      .pipe(
+        take(1),
+        map((arrayBuffer) =>
+          btoa(
+            Array.from(new Uint8Array(arrayBuffer))
+            .map((b) => String.fromCharCode(b))
+            .join('')
+          )
+        ),
       )
+  }
+
+  async createUserWithEmailAndPassword(email, password, username, d_id, discord_image){
+    
+
+    (await this.imageUrlToBase64(discord_image)).subscribe( (res) => {
+      const storageRef = this.storage.ref(`/profile_pictures/`+ d_id + `.png`);
+      const task = storageRef.putString(res, 'base64', {contentType: 'image/png'});
+      task.snapshotChanges().pipe(
+        finalize(() => {
+          storageRef.getDownloadURL().subscribe(image_url => {
+            return new Promise<any>((resolve, reject) => {
+              this.afAuth.createUserWithEmailAndPassword(email, password).then(credential => {
+                credential.user.updateProfile({
+                  displayName: username,
+                  photoURL: image_url
+                })
+              }).then(
+                async res => {
+                  await this.afAuth.user.subscribe(user => {
+                    
+                    this.uid = user.uid
+        
+                    this.db.collection("users/").doc(this.uid).set({
+                      username: username,
+                      pfp: image_url,
+                      email: email.toLowerCase(),
+                      uid: this.uid,
+                      d_id: d_id
+                    }).then(res => {
+                      location.reload();
+                    })
+                  })
+                },
+                async err => {
+                  this.convertMessage(err.code).then(async res => {
+                    const alert = await this.alertController.create({
+                      header: "Oopsie",
+                      message: res,
+                      buttons: ["RETRY"]
+                    })
+          
+                    await alert.present();
+                  })
+                }
+              )
+            })
+          });
+        })
+      ).subscribe();
+      
     })
+  
   }
 
   async signInWithEmailAndPassword(email, password){

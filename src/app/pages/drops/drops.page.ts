@@ -3,9 +3,18 @@ import { SwiperComponent } from "swiper/angular";
 
 // import Swiper core and required modules
 import SwiperCore, { EffectCards } from "swiper";
+import { AngularFireAuth } from '@angular/fire/compat/auth';
 
 // install Swiper modules
 SwiperCore.use([EffectCards]);
+
+export interface User {
+  uid: string;
+  email: string;
+  displayName: string;
+  photoURL: string;
+  emailVerified: boolean;
+}
 
 @Component({
   selector: 'app-drops',
@@ -16,7 +25,7 @@ export class DropsPage implements OnInit {
 
   @ViewChild('swiper', { static: false }) swiper?: SwiperComponent;
   
-  constructor() { }
+  constructor(public afAuth: AngularFireAuth) { }
 
   btn1: any = false;
   btn2: any = true;
@@ -30,7 +39,12 @@ export class DropsPage implements OnInit {
   remaining: any = "0 minutes 00 secs"
   ms: any
 
-  ngOnInit() {
+  userData: User;
+
+  ngOnInit() { 
+    this.afAuth.authState.subscribe((user: any) => {
+      this.userData = user
+    })
     
     setInterval(() => {
       this.timerUpdate();
