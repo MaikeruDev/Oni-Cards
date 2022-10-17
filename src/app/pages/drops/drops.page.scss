@@ -84,7 +84,7 @@ ion-content{
                 font-weight: 700;
                 color: #313133;
                 background: #4FD1C5;
-              background: linear-gradient(90deg, #db1a29 0%, #db1a29 100%);
+                background: linear-gradient(90deg, #db1a29 0%, #db1a29 100%);
                 border: none;
                 border-radius: 1000px;
                 box-shadow: 12px 12px 24px #db1a2a8e;
@@ -118,7 +118,13 @@ ion-content{
               button:hover::before, button:focus::before {
                 opacity: 1;
               }
-              
+
+              @media (min-width:1281px) { 
+                button::after {
+                  animation: ring 1.5s infinite;
+                }
+              }
+
               button::after {
                 content: '';
                 width: 30px; height: 30px;
@@ -129,7 +135,6 @@ ion-content{
                 top: 50%;
                 left: 50%;
                 transform: translate(-50%, -50%);
-                animation: ring 1.5s infinite;
               }
               
               button:hover::after, button:focus::after {
@@ -151,11 +156,18 @@ ion-content{
               }
         }
 
-        .ring:hover::before, .ring:focus::before {
+        .ring2:hover::before, .ring2:focus::before {
             opacity: 1;
         }
 
-        .ring{
+        .ring2{
+          display: none;
+        }
+        
+        @media (min-width:1281px) { 
+          .ring2 {
+            display: block;
+            animation: ring2 1.5s infinite;
             width: 200px; height: 200px;
             border-radius: 100%;
             border: 6px solid #db1a29;
@@ -164,10 +176,10 @@ ion-content{
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            animation: ring2 1.5s infinite;
+          }
         }
 
-        .ring:hover::after, .ring:focus::after {
+        .ring2:hover::after, .ring2:focus::after {
             animation: none;
             display: none;
           }

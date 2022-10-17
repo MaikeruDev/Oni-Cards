@@ -37,7 +37,7 @@ export class RegisterPage implements OnInit {
         this.auth.alert("Wrong Discord ID","","We could not find a Discord User with this ID. Please check your input.", "OK")
       }
       else{
-        this.auth.createUserWithEmailAndPassword(email, pwd, username, discord, data.avatarURL)
+        this.auth.createUserWithEmailAndPassword(email, pwd, username, discord, data.displayAvatarURL)
       }
     })
   }
