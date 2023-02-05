@@ -1,3 +1,7 @@
+ion-menu {
+  --min-width: 85%;
+}
+
 ion-content{
   font-family: 'Nunito', sans-serif;
     div.grid{
@@ -163,6 +167,16 @@ ion-content{
         .ring2{
           display: none;
         }
+
+        div{
+          ion-title{
+            font-size: 7vh
+          }
+
+          h1{
+            font-size: 2.5vh
+          }
+        }
         
         @media (min-width:1281px) { 
           .ring2 {
@@ -207,3 +221,20 @@ ion-content{
 }
 
 
+@media only screen and (max-width: 940px){
+  ion-content{
+    div.grid{
+      div.middle{
+        div{
+          ion-title{
+            font-size: 4.5vh
+          }
+
+          h1{
+            font-size: 2.5vh
+          }
+        }
+      }
+    }
+  }
+}

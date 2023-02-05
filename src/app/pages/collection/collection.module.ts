@@ -9,13 +9,16 @@ import { CollectionPageRoutingModule } from './collection-routing.module';
 import { CollectionPage } from './collection.page';
 import { HeaderComponentModule } from 'src/app/components/header/header.module';
 
+import { SwiperModule } from 'swiper/angular';
+
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
     CollectionPageRoutingModule,
-    HeaderComponentModule
+    HeaderComponentModule,
+    SwiperModule
   ],
   declarations: [CollectionPage]
 })

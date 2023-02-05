@@ -1,28 +1,45 @@
+
 <ion-toolbar style="--background: var(--ion-background-color, #fff); --min-height: 66px !important;">
-  <ion-item style="position: absolute; left: 50%; top: 0; transform: translateX(-50%); --padding-bottom: 5px; --padding-top: 5px; --padding-start: 100vw; --padding-end: 100vw">
+  <ion-item lines="none" style="position: absolute; left: 50%; top: 0; transform: translateX(-50%); --padding-bottom: 5px; --padding-top: 5px; --padding-start: 100vw; --padding-end: 100vw">
     <ion-img src="../../assets/logo.png" style="width: 205px;"></ion-img>
     
     <ion-searchbar style="width: 25vw" placeholder="Search for Character or Anime" inputmode="decimal" type="decimal" (ionChange)="onSearchChange($event)" [debounce]="250"></ion-searchbar>
 
     <ion-button (click)="routeTo('drops')" expand="block" fill="clear" shape="round" [color]="'drops' == page ? 'primary' : 'dark'">
-      Drops
+      <span>
+        Drops
+      </span>
       <ion-icon slot="end" name="flash"></ion-icon>
     </ion-button>
     <ion-button (click)="routeTo('collection')" expand="block" fill="clear" shape="round" [color]="'collection' == page ? 'primary' : 'dark'">
-      Collection
+      <span>
+        Collection
+      </span>
       <ion-icon slot="end" name="albums"></ion-icon>
     </ion-button>
     <ion-button (click)="routeTo('social')" expand="block" fill="clear" shape="round" [color]="'social' == page ? 'primary' : 'dark'">
-      Social
+      <span>
+        Social
+      </span>
       <ion-icon slot="end" name="body"></ion-icon>
     </ion-button>
     <ion-button (click)="routeTo('combat')" expand="block" fill="clear" shape="round" [color]="'combat' == page ? 'primary' : 'dark'">
-      Combat
+      <span>
+        Combat
+      </span>
       <ion-icon slot="end" name="skull"></ion-icon>
     </ion-button>
     <ion-button (click)="routeTo('other')" expand="block" fill="clear" shape="round" [color]="'other' == page ? 'primary' : 'dark'">
-      Other
+      <span>
+        Other
+      </span>
       <ion-icon slot="end" name="apps"></ion-icon>
     </ion-button>
+
+    
   </ion-item>
+  <ion-menu-toggle id="main-content">
+  <ion-button class="mobile" expand="block" fill="clear" shape="round" [color]="'other' == page ? 'primary' : 'dark'">
+    <ion-icon slot="icon-only" name="menu"></ion-icon>
+  </ion-button></ion-menu-toggle>
 </ion-toolbar>

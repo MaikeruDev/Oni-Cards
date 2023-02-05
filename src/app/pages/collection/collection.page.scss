@@ -1,0 +1,21 @@
+ion-content{
+  ion-grid{
+    width: 80%;
+    ion-row{
+      ion-col{
+        padding: 50px;
+        ion-card{
+          img{
+            pointer-events: none;
+          }
+        }
+      }
+    }
+  }
+}
+
+.img-wrapper {
+  width: 256px;
+  background-size: cover;
+  background-repeat: no-repeat;
+}

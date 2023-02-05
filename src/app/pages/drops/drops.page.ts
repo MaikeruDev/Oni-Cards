@@ -4,6 +4,7 @@ import { SwiperComponent } from "swiper/angular";
 // import Swiper core and required modules
 import SwiperCore, { EffectCards } from "swiper";
 import { AngularFireAuth } from '@angular/fire/compat/auth';
+import { RestApiService } from 'src/app/services/rest-api.service';
 
 // install Swiper modules
 SwiperCore.use([EffectCards]);
@@ -25,7 +26,7 @@ export class DropsPage implements OnInit {
 
   @ViewChild('swiper', { static: false }) swiper?: SwiperComponent;
   
-  constructor(public afAuth: AngularFireAuth) { }
+  constructor(public afAuth: AngularFireAuth, public api: RestApiService) { }
 
   btn1: any = false;
   btn2: any = true;
@@ -71,8 +72,11 @@ export class DropsPage implements OnInit {
     }
   }
 
-  activateDrop(){
+  async activateDrop(){
     this.activeDrop = true;
+    (await this.api.dropCards()).subscribe(async (cards: any) => {
+      console.log(cards)
+    })
     //document.getElementById
   }
 

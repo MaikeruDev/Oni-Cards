@@ -1,3 +1,19 @@
+<ion-menu contentId="main-content" swipeGesture="false">
+  <ion-header>
+    <ion-toolbar>
+      <ion-menu-toggle slot="end">
+        <ion-button fill="">
+          <ion-icon slot="icon-only" name="close"></ion-icon>
+        </ion-button>
+      </ion-menu-toggle>
+      <ion-img src="../../../assets/logo.png" style="width: 205px; padding: 5px 0px 0px 8px"></ion-img>
+    </ion-toolbar>
+  </ion-header>
+  <ion-content class="ion-padding">
+    
+  </ion-content>
+</ion-menu>
+
 <ion-header class="ion-no-border" [translucent]="true">
   <app-header page="drops"></app-header>
 </ion-header>
@@ -13,19 +29,19 @@
     <div class="middle">
       <swiper [effect]="'cards'" [grabCursor]="true" class="mySwiper" initialSlide="1" (slideChange)="onSlideChange()" #swiper *ngIf="activeDrop">
         <ng-template swiperSlide>
-          <img [ngClass]="{card_active: btn1}" src="../../../assets/temp/card.png" alt="">
+          <img class="card_active" src="../../../assets/temp/card.png" alt="">
           <ion-button (click)="grabCard()" expand="block" [fill]="btn1 ? 'solid' : 'outline'" [disabled]="!btn1">
             Select Card
           </ion-button>
         </ng-template>
         <ng-template swiperSlide>
-          <img [ngClass]="{card_active: btn2}" src="../../../assets/temp/card2.png" alt="">
+          <img class="card_active" src="../../../assets/temp/card2.png" alt="">
           <ion-button (click)="grabCard()" expand="block" [fill]="btn2 ? 'solid' : 'outline'" [disabled]="!btn2">
             Select Card
           </ion-button>
         </ng-template>
         <ng-template swiperSlide>
-          <img [ngClass]="{card_active: btn3}" src="../../../assets/temp/card3.png" alt="">
+          <img class="card_active" src="../../../assets/temp/card3.png" alt="">
           <ion-button (click)="grabCard()" expand="block" [fill]="btn3 ? 'solid' : 'outline'" [disabled]="!btn3">
             Select Card
           </ion-button>
@@ -35,9 +51,9 @@
       <div class="ring2" *ngIf="activeDrop"></div>
       
       <div style="position:relative; top: 35%; transform:translateY(-80%)" *ngIf="!activeDrop">
-        <h1 class="ion-text-center" style="font-size: 2.5vh">Time until next drop:</h1>
-        <ion-title class="ion-text-center" style="font-size: 7vh" *ngIf="900000 >= this.now - this.lastDrop">{{ remaining }}</ion-title>
-        <ion-title class="ion-text-center" style="font-size: 7vh" *ngIf="this.now - this.lastDrop > 900000">Now</ion-title>
+        <h1 class="ion-text-center">Time until next drop:</h1>
+        <ion-title class="ion-text-center" *ngIf="900000 >= this.now - this.lastDrop">{{ remaining }}</ion-title>
+        <ion-title class="ion-text-center" *ngIf="this.now - this.lastDrop > 900000">Now</ion-title>
       </div>
 
       <div class="wrap" *ngIf="readyDrop && !activeDrop">
