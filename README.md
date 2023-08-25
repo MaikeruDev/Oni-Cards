@@ -1,22 +1,22 @@
-# Where to play
+# Oni Cards Web
 
-Oni-Cards is available to play on this [Website](https://oni.maikeru.dev). Please keep in mind, that Oni-Cards is not even close to being finished and that everything you see is still Work in Progress.
+Oni Cards Web is a web-based version of the Oni Cards Discord bot, inspired by Karuta. The aim of this project was to create an online platform where users can enjoy the card game without needing to use Discord.
 
-# What is the Goal ?
+## Features
 
-The goal of this project is to create a trading card game for anime enthusiasts.
+- Play the Oni Cards game online, simulating the experience of the Discord bot.
+- Browse and collect different editions of cards.
+- Perform actions such as trading, burning, and upgrading cards.
+- Utilize a custom database containing handcrafted card data. 
 
-The player should be able to do the following things:
+## Contributing
 
-* Drop cards every 15 minutes
-* See their collection
-* Burn cards for gold and dust
-* Upgrade cards
-* Add friends
-* Fight through Dungeons for rewards or battle some friends
-* As mentioned, fights will be classic turn based 3v3
-* Every card gets an element and attacks
-* Achievements
-* Trade cards with other players
-* And many more small features to better the player experience...
+Contributions to the Oni Cards Web project are welcome. Feel free to fork the repository, make your changes, and submit a pull request. Make sure to follow the project's coding style and guidelines.
 
+## License
+
+This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details.
+
+## Acknowledgments
+
+The Oni Cards Web project is developed by [MaikeruDev](https://github.com/MaikeruDev) and is based on the Oni Cards Discord bot concept. The original bot was inspired by Karuta and aimed to provide users with a fun and engaging card game experience.
